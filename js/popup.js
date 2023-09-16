@@ -1,10 +1,7 @@
-document.getElementById('toggleInjection').addEventListener('change', function(event) {
-    let message = {
-        action: event.target.checked ? "injectScript" : "removeScript"
-    };
-
+document.getElementById('startAddStickyNote').addEventListener('click', function() {
+    console.log("sending message injectScript")
     // Send the message to the content script of the current tab
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
-        chrome.tabs.sendMessage(tabs[0].id, message);
+        chrome.tabs.sendMessage(tabs[0].id, 'injectScript');
     });
 });
