@@ -2,6 +2,7 @@ let highlightedElement = null;
 const originalHrefs = [];
 let isAddingTicket = false;
 let ticketPosition = {x: 0, y: 0};
+
 const injectStarterHTML = function () {
     const modalHTML = `
       <div id="myModal" class="modal">
@@ -83,11 +84,24 @@ const postStickyNote = function (note) {
             highlightedElement.addEventListener('click', function () {
                 toggleStickyVisibility(stickyId);
             });
+            highlightedElement.addEventListener('mouseover', function () {
+               highlightStickyNote(stickyId);
+            });
+            highlightedElement.addEventListener('mouseout',function () {
+                resetStickyNote(stickyId);
+            })
             clearStickyNoteAdding();
         }
     }
 }
-
+const resetStickyNote = function (stickyId){
+    const element = document.getElementById(stickyId)
+    element.style.backgroundColor = 'yellow'
+}
+const highlightStickyNote = function(stickyId){
+    const element = document.getElementById(stickyId)
+element.style.backgroundColor = 'orange'
+}
 const toggleStickyVisibility = function (id) {
     console.log(`trying to find element with id ${id}`)
     const element = document.getElementById(id)
